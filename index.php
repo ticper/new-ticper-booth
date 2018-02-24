@@ -1,3 +1,11 @@
+<?php
+  session_start();
+  if(isset($_SESSION['UserID']) == '') {
+
+  } else {
+    print("<script>location.href = 'home.php';</script>");
+  }
+?>
 <!DOCTYPE HTML>
 <html lang="ja">
   <head>
