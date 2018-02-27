@@ -48,6 +48,7 @@
     <ul id="d-recept" class="dropdown-content">
       <li><a href="r-qrcheck.php">QRコード</a></li>
       <li><a href="r-kobetsu.php">個別注文</a></li>
+      <li><a href="r-return.php">払い戻し</a></li>
     </ul>
     <ul id="d-orgfood" class="dropdown-content">
       <li><a href="of-list.php">団体・食品一覧</a></li>
