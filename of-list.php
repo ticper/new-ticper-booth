@@ -98,3 +98,46 @@
         $('.sidenav').sidenav();
       });
     </script>
+    <div class="container">
+      <div class="col s12">
+        <h3>団体・食品一覧</h3>
+        <p>団体・食品を閲覧できます。</p>
+        <?php
+          require_once('config/config.php');
+          $sql = mysqli_query($db_link, "SELECT * FROM tp_org");
+          while ($result = mysqli_fetch_assoc($sql)) {
+            print('<h4>'.$result['OrgName'].'</h4>');
+            print('<h5>食品一覧</h5>');
+            $OrgID = $result['OrgID'];
+            $sql2 = mysqli_query($db_link, "SELECT * FROM tp_food WHERE OrgID = '$OrgID'");
+            $jun = 0;
+            print('<div class="row">');
+            while ($result2 = mysqli_fetch_assoc($sql2)) {
+              print('<div class="col s12 m4">');
+              print('<div class="card">');
+              print('<div class="card-image">');
+              print('<img src="img/'.$result2['FoodID'].'.png">');
+              print('<span class="card-title">'.$result2['FoodName'].'</span>');
+              print('</div>');
+              print('<div class="card-content">');
+              print('<p>価格: '.$result2['FoodPrice'].'円</p>');
+              print('</div>');
+              print('<div class="card-action">');
+              print('<a href="deletefood.php?id='.$result2['FoodID'].'" class="btn">削除</a> ');
+              print('<a href="editfood.php?id='.$result2['FoodID'].'" class="btn">編集</a>');
+              print('</div>');
+              print('</div>');
+              print('</div>');
+              $jun = $jun + 1;
+              if($jun == 3) {
+                print('</div><div class="row">');
+              } else {
+
+              }
+            }
+          }
+        ?>
+      </div>
+    </div>
+  </body>
+</html>
