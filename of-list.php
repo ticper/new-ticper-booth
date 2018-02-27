@@ -121,6 +121,7 @@
               print('</div>');
               print('<div class="card-content">');
               print('<p>価格: '.$result2['FoodPrice'].'円</p>');
+              print('<br><p>データID: '.$result2['FoodID'].'</p>');
               print('</div>');
               print('<div class="card-action">');
               print('<a href="deletefood.php?id='.$result2['FoodID'].'" class="btn">削除</a> ');
