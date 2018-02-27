@@ -106,7 +106,7 @@
           require_once('config/config.php');
           $sql = mysqli_query($db_link, "SELECT * FROM tp_org");
           while ($result = mysqli_fetch_assoc($sql)) {
-            print('<h4>'.$result['OrgName'].'</h4>');
+            print('<h4>'.$result['OrgName'].' - ID: '.$result['OrgID'].'</h4>');
             print('<h5>食品一覧</h5>');
             $OrgID = $result['OrgID'];
             $sql2 = mysqli_query($db_link, "SELECT * FROM tp_food WHERE OrgID = '$OrgID'");
