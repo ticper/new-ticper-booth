@@ -132,8 +132,6 @@
               $jun = $jun + 1;
               if($jun == 3) {
                 print('</div><div class="row">');
-              } else {
-
               }
             }
           }
