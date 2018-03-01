@@ -134,6 +134,7 @@
                 print('</div><div class="row">');
               }
             }
+            print('</div>');
           }
         ?>
       </div>
