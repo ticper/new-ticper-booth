@@ -107,6 +107,7 @@
             $sql = mysqli_query($db_link, "SELECT * FROM tp_food WHERE FoodID = '$foodid'");
             $result = mysqli_fetch_assoc($sql);
             print('<h4>'.$result['FoodName'].'</h4>');
+            print('<hr />');
           ?>
           </ul>
         </div>
