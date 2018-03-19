@@ -108,7 +108,14 @@
             $result = mysqli_fetch_assoc($sql);
             print('<h4>'.$result['FoodName'].'</h4>');
             print('<hr />');
-          ?>
+            $sql = mysqli_query($db_link, "SELECT FoodStockFrom, FoodStock, Bought, Used, Bought - Used AS num FROM tp_food WHERE FoodID = '$foodid'");
+            $result2 = mysqli_fetch_assoc($sql);
+            print('<h5>食券総枚数</h5>'.$result2['FoodStockFrom'].'枚<hr />');
+            print('<h5>販売済み枚数</h5>'.$result2['Bought'].'枚<hr />');
+            print('<h5>未使用枚数</h5>'.$result2['num'].'枚<hr />');
+            print('<h5>使用済み枚数</h5>'.$result2['Used'].'枚<hr />');
+            print('<h5>食券残り枚数</h5>'.$result2['FoodStock'].'枚<hr />');
+		  ?>
           </ul>
         </div>
       </div>
