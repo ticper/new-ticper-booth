@@ -17,7 +17,7 @@
 	$e_FoodStock = $db_link -> real_escape_string($FoodStock);
 
 	// HTMLの特殊文字列をエスケープする
-	$h_FoodName = htmlspecialchars($e_FoodName, ENT_QUOTES, 'UTF-8', false;)
+	$h_FoodName = htmlspecialchars($e_FoodName, ENT_QUOTES, 'UTF-8', false);
 	$h_OrgID = htmlspecialchars($e_OrgID, ENT_QUOTES, 'UTF-8', false);
 	
 
