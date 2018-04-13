@@ -5,7 +5,7 @@
     } else {
     }
     if(isset($_SESSION['CartID']) == '') {
-        $_SESSION['CardID'] = rand(100000, 999999);
+        $_SESSION['CartID'] = rand(100000, 999999);
     } else {
 
     }
@@ -105,9 +105,16 @@
     <div class="container">
       <div class="row">
         <div class="row s12">
+          <table>
+            <tr><th>商品名</th><th>価格</th><th></th></tr>
             <?php
-                require_once('config/config.php');
-                $sql = mysqli_query($db_link, "SELECT ")
+              require_once('config/config.php');
+              $sql = mysqli_query($db_link, "SELECT FoodID, FoodName, FoodPrice FROM tp_food");
+              while($result = mysqli_fetch_assoc($sql)) {
+                print("<tr><td>".$result['FoodName']."</td><td>".$result['FoodPrice'].'</td><td><form action="r-kobetsu-addcart.php" method="POST"><input type="hidden" name="FoodID" value="'.$result['FoodID'].'"><input type="number" name="maisu" id="maisu" class="validate" placeholder="枚数を入力"><input type="submit" value="送信" class="btn"></form></td></tr>');
+              }
+            ?>
+          </table>
         </div>
       </div>
     </div>
