@@ -115,6 +115,7 @@
               }
             ?>
           </table>
+          <a href="r-kobetsu-checkout1.php" class="btn">チェックアウト</a>&nbsp;<a href="r-kobetsu-viewcart.php" class="btn">注文内容を見る</a>
         </div>
       </div>
     </div>
