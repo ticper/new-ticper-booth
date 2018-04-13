@@ -124,7 +124,15 @@
               print('<br><p>データID: '.$result2['FoodID'].'</p>');
               print('</div>');
               print('<div class="card-action">');
-              print('<a href="deletefood.php?id='.$result2['FoodID'].'" class="btn">削除</a> ');
+              print('<script>
+                function confirmid1(){
+                  var message = "本当に削除しますか？";
+                  if(confirm(message)){
+                    location.href = "deletefood.php?id='.$result2['FoodID'].'";
+                  }
+                }
+               </script>');
+              print('<p onClick="confirmid1()" class="btn">削除</p> ');
               print('<a href="editfood.php?id='.$result2['FoodID'].'" class="btn">編集</a>');
               print('</div>');
               print('</div>');
