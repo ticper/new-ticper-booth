@@ -126,7 +126,7 @@
               print('<div class="card-action">');
               print('<script>
                 function confirmid'.$result2['FoodID'].'(){
-                  var message = "本当に削除しますか？";
+                  var message = "本当に'.$result2['FoodName'].'を削除しますか？";
                   if(confirm(message)){
                     location.href = "deletefood.php?id='.$result2['FoodID'].'";
                   }
