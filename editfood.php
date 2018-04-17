@@ -150,6 +150,9 @@
 	           				 ?>
             				<label for="FoodStock">販売可能数</label>
             			</div>
+            			<?php
+	            			print('<input type="hidden" name="FoodID" value="'.$foodid.'">');
+	            		?>
             			<input type="submit" class="btn" value="送信">
         	  		</form>
         	  	</div>
