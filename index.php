@@ -43,7 +43,7 @@
     <nav class="light-blue darken-4">
       <div class="container">
         <div class="nav-wrapper">
-          <a href="#!" class="brand-logo">Ticper</a>
+          <a href="home.php" class="brand-logo">Ticper</a>
           <a href="#" data-target="mobilemenu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
             <li><a href="https://org.yamabuki.ticper.com">団体用Ticoer</a></li>

@@ -84,7 +84,7 @@
     <nav class="light-blue darken-4">
       <div class="container">
         <div class="nav-wrapper">
-          <a href="#!" class="brand-logo">Ticper</a>
+          <a href="home.php" class="brand-logo">Ticper</a>
           <div class="right hide-on-med-and-down">
             <a href="#!" onClick="var elem = document.querySelector('.sidenav');var instance = M.Sidenav.getInstance(elem);instance.open();" class="btn">メニューを開く</a>
           </div>
