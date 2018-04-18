@@ -105,6 +105,7 @@
     <div class="container">
       <div class="row">
         <div class="row s12">
+          <h3>個別注文</h3>
           <table>
             <tr><th>商品名</th><th>価格</th><th></th></tr>
             <?php
