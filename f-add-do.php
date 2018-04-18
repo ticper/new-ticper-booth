@@ -22,7 +22,7 @@
 	
 
 	// 最新の食品数を取得して食品数+1したデータをFoodIDにする。
-	$sql = mysqli_query($db_link, "SELECT MAX(*) AS num FROM tp_food");
+	$sql = mysqli_query($db_link, "SELECT MAX(FoodID) AS num FROM tp_food");
 	$result = mysqli_fetch_assoc($sql);
 	$FoodID = $result['num'] + 1;
 
