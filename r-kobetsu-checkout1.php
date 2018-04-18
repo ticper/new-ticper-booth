@@ -138,8 +138,8 @@
         <a href="r-kobetsu.php" class="btn">注文画面に戻る</a><br><br>
         <form action="r-kobetsu-buy.php" method="POST">
             <input type="hidden" name="cartid" value="<?php print($CartID); ?>">
-            <input type="number" name="get" placeholder="預金額" class="validate">
-            <input type="submit" class="btn">>
+            <input type="number" name="get" placeholder="預金額" class="validate" min="<?php print($price); ?>">
+            <input type="submit" class="btn">
         </form>
         </div>
       </div>
