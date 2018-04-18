@@ -129,11 +129,11 @@
               <label for="FoodDescription">食品の説明</label>
             </div>
             <div class="input-field col s12">
-              <input id="FoodPrice" class="validate" type="number" name="FoodPrice" required>
+              <input id="FoodPrice" class="validate" type="number" name="FoodPrice" min="1" required>
               <label for="FoodPrice">価格</label>
             </div>
             <div class="input-field col s12">
-              <input id="FoodStock" class="validate" type="number" name="FoodStock" required>
+              <input id="FoodStock" class="validate" type="number" name="FoodStock" min="1" required>
               <label for="FoodStock">販売可能数</label>
             </div>
             <input type="submit" class="btn" value="送信">

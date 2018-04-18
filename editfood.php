@@ -140,13 +140,13 @@
            				</div>
             			<div class="input-field col s12">
             				<?php
-	        	    			print('<input id="FoodPrice" class="validate" type="number" name="FoodPrice" value="'.$result2['FoodPrice'].'" required>');
+	        	    			print('<input id="FoodPrice" class="validate" type="number" name="FoodPrice" value="'.$result2['FoodPrice'].'" min="1" required>');
 	        	    		?>
             				<label for="FoodPrice">価格</label>
             			</div>
             			<div class="input-field col s12">
             				<?php
-	            				print('<input id="FoodStock" class="validate" type="number" name="FoodStock" value="'.$result2['FoodStock'].'" required>');
+	            				print('<input id="FoodStock" class="validate" type="number" name="FoodStock" value="'.$result2['FoodStock'].'" min="1" required>');
 	           				 ?>
             				<label for="FoodStock">販売可能数</label>
             			</div>
