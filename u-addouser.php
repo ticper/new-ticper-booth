@@ -105,7 +105,7 @@
           <p>団体ユーザを登録します。</p>
           <form action="u-addouser-do.php" method="POST" class="col s12">
             <div class="input-field col s12">
-              <input id="UserID" class="validate" type="text" name="UserID" required>
+              <input id="UserID" class="validate" type="text" name="UserID" onKeyup="this.value=this.value.replace(//[^-_@+*;:#$%&^A-Z^a-z^0-9]+/i,'')" onblur="this.value=this.value.replace(/[^-_@+*;:#$%&^A-Z^a-z^0-9]+/i,'')" required>
               <label for="UserID">ユーザID</label>
             </div>
             <div class="input-field col s12">
@@ -113,7 +113,7 @@
               <label for="UserName">名前</label>
             </div>
             <div class="input-field col s12">
-              <input id="Password" class="valudate" type="password" name="Password" required>
+              <input id="Password" class="valudate" type="password" name="Password" onKeyup="this.value=this.value.replace(//[^-_@+*;:#$%&^A-Z^a-z^0-9]+/i,'')" onblur="this.value=this.value.replace(/[^-_@+*;:#$%&^A-Z^a-z^0-9]+/i,'')" required>
               <label for="Password">パスワード</label>
             </div>
             <div class="input-field col s12">
