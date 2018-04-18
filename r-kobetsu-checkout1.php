@@ -119,11 +119,16 @@
                 $maisuu = 0;
                 while($result = mysqli_fetch_assoc($sql)) {
                     $FoodID = $result['FoodID'];
-                    $sql2 = mysqli_query($db_link, "SELECT FoodName, FoodPrice FROM tp_food WHERE FoodID = '$FoodID'");
+                    $sql2 = mysqli_query($db_link, "SELECT FoodName, FoodPrice, FoodStock FROM tp_food WHERE FoodID = '$FoodID'");
                     $result2 = mysqli_fetch_assoc($sql2);
-                    print('<tr><td>'.$result2['FoodName'].'</td><td>'.$result2['FoodPrice'].'円</td><td>'.$result['Sheets'].'枚</td></tr>');
-                    $price = $price + ($result2['FoodPrice'] * $result['Sheets']);
-                    $maisuu = $maisuu + $result['Sheets'];
+                    print('<tr><td>'.$result2['FoodName'].'</td><td>'.$result2['FoodPrice'].'円</td>');
+                    if($result2['FoodStock'] > $result['Sheets']) {
+                        print('<td>'.$result['Sheets'].'枚</td></tr>');
+                        $price = $price + ($result2['FoodPrice'] * $result['Sheets']);
+                        $maisuu = $maisuu + $result['Sheets'];
+                    } else {
+                        print('<td>売り切れ</td>');
+                    }
                 }
             ?>
             <tr><td></td><td>枚数</td><td><?php print($maisuu); ?>枚</td></tr>
