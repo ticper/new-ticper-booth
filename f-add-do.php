@@ -27,7 +27,7 @@
 	$FoodID = $result['num'] + 1;
 
 	// 食品登録
-	$sql = mysqli_query($db_link, "INSERT INTO tp_food VALUES ('$FoodID', '$FoodName', '$OrgID', '$FoodDescription', '$FoodPrice', '$FoodStock', '0', '0')");
+	$sql = mysqli_query($db_link, "INSERT INTO tp_food(FoodID,FoodName,OrgID,FoodDescription,FoodPrice,FoodStockFrom,FoodStock,Bought,Used) VALUES ('$FoodID', '$FoodName', '$OrgID', '$FoodDescription', '$FoodPrice', '$FoodStock', '$FoodStock', '0', '0')");
 	print("<script>alert('登録が完了しました。詳しくは団体食品一覧を御覧ください。');location.href = 'f-add.php';</script>");
 ?>
 
