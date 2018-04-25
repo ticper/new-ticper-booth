@@ -24,6 +24,6 @@
         $sql2 = mysqli_query($db_link, "INSERT INTO tp_ticket VALUES ('$ticketid', '$ticketAcode', '', '$CartID', '$FoodID', '$Sheets', '0')");
         $sql2 = mysqli_query($db_link, "UPDATE tp_food SET FoodStock = FoodStock - '$Sheets', Bought = Bought + '$Sheets' WHERE FoodID = '$FoodID'");
     }
-    $_SESSION['CartID'] = "";
+    unset($_SESSION("CartID"));
     print('<script>location.href = "r-kobetsu-viewticket.php?cartid='.$CartID.'";</script>');
 ?>
