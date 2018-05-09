@@ -85,7 +85,7 @@
           				<a href="#" onclick="window.print(); return false;">印刷する</a>
             			<a href="#!" onClick="var elem = document.querySelector('.sidenav');var instance = M.Sidenav.getInstance(elem);instance.open();" class="btn">メニューを開く</a>
           			</div>
-          			<a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          			<a href="#" data-target="slide-out" class="sidenav-trigger"></a>
         		</div>
       		</div>
     	</nav>
@@ -104,7 +104,7 @@
     					$goukei = 0;
     					$sql = mysqli_query($db_link, "SELECT * FROM tp_ticket WHERE CartID = '$CartID'");
     					while ($result = mysqli_fetch_assoc($sql)) {
-    						print('<div class="col s6 m3">');
+    						print('<div class="col s6 m4">');
     						print('<img src="https://api.qrserver.com/v1/create-qr-code/?data='.$result['TicketACode'].'&size=200x200" alt="QRコード" /><br>');
     						$foodid = $result['FoodID'];
     						$sql2 = mysqli_query($db_link, "SELECT FoodName, OrgID, FoodPrice FROM tp_food WHERE FoodID = '$foodid'");
@@ -114,13 +114,15 @@
     						$result3 = mysqli_fetch_assoc($sql3);
     						print('<b>'.$result2['FoodName'].'</b>('.$result['Sheets'].'枚)<br>');
     						print($result3['OrgName'].'<br>('.$result3['OrgPlace'].'で交換)<br>');
-    						print('<b>'.$result2['FoodPrice'].'円</b>');
+    						print('<b>'.$result2['FoodPrice'].'円</b>&nbsp;');
+    						print('<label><input type="checkbox" class="filled-in" /><span>使用済み</span></label><br><br>');
     						$goukei = $goukei + ($result2['FoodPrice'] * $result['Sheets']);
     						print('</div>');
     						$now = $now + 1;
-    						if ($now == 3) {
+    						if ($now == 4) {
     							print('</div><div class="row">');
-    							$now = 0;    						}
+    							$now = 0;    						
+    						}
     					}
     				?>
     				
