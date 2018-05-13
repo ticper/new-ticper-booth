@@ -139,7 +139,7 @@
             <input type="hidden" name="goukei" value="<?php print($goukei); ?>">
             <input type="hidden" name="UserID" value="<?php print($UserID2); ?>">
             <input type="number" name="azukari" placeholder="預り金" class="validate" min="<?php print($goukei);?>">
-            <input type="submit" value="決済">
+            <input type="submit" class="btn" value="決済">
           </form>
         </div>
       </div>
