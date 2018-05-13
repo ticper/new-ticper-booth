@@ -6,7 +6,7 @@
 
   }
   $UserID2 = $_GET['CustID'];
-  if ($UserID == '') {
+  if ($UserID2 == '') {
     print("<script>alert('顧客IDが空になっているため、カートデータを読み取れません。'); location.href='r-qrcheck.php';</script>");
   } else {
 
