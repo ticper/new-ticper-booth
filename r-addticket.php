@@ -8,27 +8,27 @@
   $UserID = $_POST['UserID'];
   if ($UserID == '') {
     print("<script>alert('顧客IDが空になっているため、食券を発行できません。'); location.href='r-qrcheck.php';</script>");
+    exit();
   } else {
 
   }
   $azukari = $_POST['azukari'];
   $goukei = $_POST['goukei'];
   if($azukari - $goukei  < 0){
-    print("<script>alert('不正なリクエスト'); location.href='r-qrcheck.php';</script>");
+    print("<script>alert('不正なリクエスト'); location.href='r-checkuserscart.php?CustID=".$UserID."';</script>");
   } else {
-  
-  }
-  require_once('config/config.php');
+    require_once('config/config.php');
 
-  $sql = mysqli_query($db_link, "SELECT FoodID, Sheets FROM tp_cust_carts WHERE UserID = '$UserID'");
-  while($result = mysqli_fetch_assoc($sql)) {
-    $Acode = rand(100000, 999999);
-    $FoodID = $result['FoodID'];
-    $Sheets = $result['Sheets'];
-    $sql2 = mysqli_query($db_link, "INSERT INTO tp_ticket(TicketACode, UserID, FoodID, Sheets, Used) VALUES ('$Acode', '$UserID', '$FoodID', '$Sheets', 0)");
-    $sql2 = mysqli_query($db_link, "UPDATE tp_food SET FoodStock = FoodStock - '$Sheets', Bought = Bought - '$Sheets' WHERE FoodID = '$FoodID'");
+    $sql = mysqli_query($db_link, "SELECT FoodID, Sheets FROM tp_cust_carts WHERE UserID = '$UserID'");
+    while($result = mysqli_fetch_assoc($sql)) {
+     $Acode = rand(100000, 999999);
+     $FoodID = $result['FoodID'];
+     $Sheets = $result['Sheets'];
+     $sql2 = mysqli_query($db_link, "INSERT INTO tp_ticket(TicketACode, UserID, FoodID, Sheets, Used) VALUES ('$Acode', '$UserID', '$FoodID', '$Sheets', 0)");
+      $sql2 = mysqli_query($db_link, "UPDATE tp_food SET FoodStock = FoodStock - '$Sheets', Bought = Bought - '$Sheets' WHERE FoodID = '$FoodID'");
+    }
+    $sql2 = mysqli_query($db_link, "DELETE FROM tp_cust_carts WHERE UserID = '$UserID'");
   }
-  $sql2 = mysqli_query($db_link, "DELETE FROM tp_cust_carts WHERE UserID = '$UserID'");
 ?>
 
 <!DOCTYPE HTML>
