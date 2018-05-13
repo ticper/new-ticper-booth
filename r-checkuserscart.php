@@ -5,7 +5,7 @@
   } else {
 
   }
-  $UserID = $_GET['CustID'];
+  $UserID2 = $_GET['CustID'];
   if ($UserID == '') {
     print("<script>alert('顧客IDが空になっているため、カートデータを読み取れません。'); location.href='r-qrcheck.php';</script>");
   } else {
@@ -108,12 +108,13 @@
       <div class="row">
         <div class="col s12">
           <?php
-            $sql = mysqli_query($db_link, "SELECT UserName FROM tp_user_cust WHERE UserID = '$UserID'");
+            require_once('config/config.php');
+            $sql = mysqli_query($db_link, "SELECT UserName FROM tp_user_cust WHERE UserID = '$UserID2'");
             $result = mysqli_fetch_assoc($sql);
             print('<h3>'.$result['UserName'].'さんのカート</h3>');
             print('<table>');
             print('<tr><th>食品名</th><th>枚数</th><th>価格</th></tr>');
-            $sql = mysqli_query($db_link, "SELECT Sheets, FoodID FROM tp_cust_carts WHERE UserID = '$UserID'");
+            $sql = mysqli_query($db_link, "SELECT Sheets, FoodID FROM tp_cust_carts WHERE UserID = '$UserID2'");
             $goukei = 0;
             while($result2 = mysqli_fetch_assoc($sql)) {
               $FoodID = $result2['FoodID'];
@@ -123,7 +124,7 @@
               $Stock = $result3['FoodStock'];
               $sa = $Stock - $Sheets;
               if ($sa < 0) {
-                $sql2 = mysqli_query($db_link, "DELETE FROM tp_cust_carts WHERE UserID = '$UserID' AND FoodID = '$FoodID'");
+                $sql2 = mysqli_query($db_link, "DELETE FROM tp_cust_carts WHERE UserID = '$UserID2' AND FoodID = '$FoodID'");
                 print('<tr><td>'.$result3['FoodName'].'</td><td>'.$Sheets.'枚</td><td><b>売り切れ</b></td></tr>');
               } else {
                 print('<tr><td>'.$result3['FoodName'].'</td><td>'.$Sheets.'枚</td><td><b>'.$result3['FoodPrice'].'</b></td></tr>');
@@ -136,7 +137,7 @@
 
           <form action="r-addticket.php" method="POST">
             <input type="hidden" name="goukei" value="<?php print($goukei); ?>">
-            <input type="hidden" name="UserID" value="<?php print($UserID); ?>">
+            <input type="hidden" name="UserID" value="<?php print($UserID2); ?>">
             <input type="number" name="azukari" placeholder="預り金" class="validate">
             <input type="submit" value="決済">
           </form>
