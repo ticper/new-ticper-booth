@@ -138,7 +138,7 @@
           <form action="r-addticket.php" method="POST">
             <input type="hidden" name="goukei" value="<?php print($goukei); ?>">
             <input type="hidden" name="UserID" value="<?php print($UserID2); ?>">
-            <input type="number" name="azukari" placeholder="預り金" class="validate">
+            <input type="number" name="azukari" placeholder="預り金" class="validate" min="<?php print($goukei);?>">
             <input type="submit" value="決済">
           </form>
         </div>
