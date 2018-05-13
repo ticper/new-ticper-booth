@@ -13,7 +13,11 @@
   }
   $azukari = $_POST['azukari'];
   $goukei = $_POST['goukei'];
-
+  if($azukari - $goukei  < 0){
+    print("<script>alert('不正なリクエスト'); location.href='r-qrcheck.php';</script>)";
+  } else {
+  
+  }
   require_once('config/config.php');
 
   $sql = mysqli_query($db_link, "SELECT FoodID, Sheets FROM tp_cust_carts WHERE UserID = '$UserID'");
