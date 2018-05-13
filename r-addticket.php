@@ -5,13 +5,28 @@
   } else {
 
   }
-  $UserID = $_GET['CustID'];
+  $UserID = $_POST['UserID'];
   if ($UserID == '') {
-    print("<script>alert('顧客IDが空になっているため、カートデータを読み取れません。'); location.href='r-qrcheck.php';</script>");
+    print("<script>alert('顧客IDが空になっているため、食券を発行できません。'); location.href='r-qrcheck.php';</script>");
   } else {
 
   }
+  $azukari = $_POST['azukari'];
+  $goukei = $_POST['goukei'];
+
+  require_once('config/config.php');
+
+  $sql = mysqli_query($db_link, "SELECT FoodID, Sheets FROM tp_cust_carts WHERE UserID = '$UserID'");
+  while($result = mysqli_fetch_assoc($sql)) {
+    $Acode = rand(100000, 999999);
+    $FoodID = $result['FoodID'];
+    $Sheets = $result['Sheets'];
+    $sql2 = mysqli_query($db_link, "INSERT INTO tp_ticket(TicketACode, UserID, FoodID, Sheets, Used) VALUES ('$Acode', '$UserID', '$FoodID', '$Sheets', 0)");
+    $sql2 = mysqli_query($db_link, "UPDATE tp_food SET FoodStock = FoodStock - '$Sheets', Bought = Bought - '$Sheets' WHERE FoodID = '$FoodID'");
+  }
+  $sql2 = mysqli_query($db_link, "DELETE FROM tp_cust_carts WHERE UserID = '$UserID'");
 ?>
+
 <!DOCTYPE HTML>
 <html lang="ja">
   <head>
@@ -107,39 +122,10 @@
     <div class="container">
       <div class="row">
         <div class="col s12">
-          <?php
-            $sql = mysqli_query($db_link, "SELECT UserName FROM tp_user_cust WHERE UserID = '$UserID'");
-            $result = mysqli_fetch_assoc($sql);
-            print('<h3>'.$result['UserName'].'さんのカート</h3>');
-            print('<table>');
-            print('<tr><th>食品名</th><th>枚数</th><th>価格</th></tr>');
-            $sql = mysqli_query($db_link, "SELECT Sheets, FoodID FROM tp_cust_carts WHERE UserID = '$UserID'");
-            $goukei = 0;
-            while($result2 = mysqli_fetch_assoc($sql)) {
-              $FoodID = $result2['FoodID'];
-              $Sheets = $result2['Sheets'];
-              $sql2 = mysqli_query($db_link, "SELECT FoodName, FoodPrice, FoodStock FROM tp_food WHERE FoodID = '$FoodID'");
-              $result3 = mysqli_fetch_assoc($sql2);
-              $Stock = $result3['FoodStock'];
-              $sa = $Stock - $Sheets;
-              if ($sa < 0) {
-                $sql2 = mysqli_query($db_link, "DELETE FROM tp_cust_carts WHERE UserID = '$UserID' AND FoodID = '$FoodID'");
-                print('<tr><td>'.$result3['FoodName'].'</td><td>'.$Sheets.'枚</td><td><b>売り切れ</b></td></tr>');
-              } else {
-                print('<tr><td>'.$result3['FoodName'].'</td><td>'.$Sheets.'枚</td><td><b>'.$result3['FoodPrice'].'</b></td></tr>');
-                $goukei = $goukei + $result3['FoodPrice'];
-              }
-            }
-          ?>
-          </table>
-          <b>合計: <?php print($goukei); ?>円</b>
-
-          <form action="r-addticket.php" method="POST">
-            <input type="hidden" name="goukei" value="<?php print($goukei); ?>">
-            <input type="hidden" name="UserID" value="<?php print($UserID); ?>">
-            <input type="number" name="azukari" placeholder="預り金" class="validate">
-            <input type="submit" value="決済">
-          </form>
+          <h3>発券しました</h3>
+          <p>受付したカートの食券を発行しました。顧客に端末の操作を促してください。</p>
+          <p>お釣りは<b><font size="5"><?php print($azukari - $goukei); ?>円</font></b>です。</p>
+          <a href="r-qrcheck.php" class="btn">QRコードチェックに戻る</a>
         </div>
       </div>
     </div>
