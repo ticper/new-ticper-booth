@@ -105,7 +105,7 @@
           <video id="preview"></video>
           <form action="r-checkuserscart.php" method="GET">
             <input type="text" name="CustID" class="validate" id="info">
-            <input type="submit" value="送信">
+            <input type="submit" value="送信" class="btn">
           </form>
 
           <script src="js/instascan.min.js"></script>
@@ -116,6 +116,7 @@
 
             scanner.addListener('scan', function(value) {
               info.value = value;
+              M.toast({html: 'QRコードを読み取りました。'})
               document.getElementById('sound-file').play();
             });
 
