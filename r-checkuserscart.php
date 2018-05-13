@@ -5,6 +5,12 @@
   } else {
 
   }
+  $UserID = $_GET['CustID'];
+  if ($UserID == '') {
+    print("<script>alert('顧客IDが空になっているため、カートデータを読み取れません。'); location.href='r-qrcheck.php';</script>");
+  } else {
+
+  }
 ?>
 <!DOCTYPE HTML>
 <html lang="ja">
@@ -101,44 +107,36 @@
     <div class="container">
       <div class="row">
         <div class="col s12">
-          <h2>ユーザQR読み取り</h2>
-          <video id="preview"></video>
-          <form action="r-checkuserscart.php" method="GET">
-            <input type="text" name="CustID" class="validate" id="info">
-            <input type="submit" value="送信" class="btn">
+          <?php
+            $sql = mysqli_query($db_link, "SELECT UserName FROM tp_user_cust WHERE UserID = '$UserID'");
+            $result = mysqli_fetch_assoc($sql);
+            print('<h3>'.$result['UserName'].'さんのカート</h3>');
+            print('<table>');
+            print('<tr><th>食品名</th><th>枚数</th><th>価格</th></tr>');
+            $sql = mysqli_query($db_link, "SELECT Sheets, FoodID FROM tp_cust_carts WHERE UserID = '$UserID'");
+            $goukei = 0;
+            while($result2 = mysqli_fetch_assoc($sql)) {
+              $FoodID = $result2['FoodID'];
+              $Sheets = $result2['Sheets'];
+              $sql2 = mysqli_query($db_link, "SELECT FoodName, FoodPrice, FoodStock FROM tp_food WHERE FoodID = '$FoodID'");
+              $result3 = mysqli_fetch_assoc($sql2);
+              $Stock = $result3['FoodStock'];
+              $sa = $Stock - $Sheets;
+              if ($sa < 0) {
+                $sql2 = mysqli_query($db_link, "DELETE FROM tp_cust_carts WHERE UserID = '$UserID' AND FoodID = '$FoodID'");
+                print('<tr><td>'.$result3['FoodName'].'</td><td>'.$Sheets.'枚</td><td><b>売り切れ</b></td></tr>');
+              } else {
+                print('<tr><td>'.$result3['FoodName'].'</td><td>'.$Sheets.'枚</td><td><b>'.$result3['FoodPrice'].'</b></td></tr>');
+                $goukei = $goukei + $result3['FoodPrice'];
+              }
+            }
+          ?>
+          </table>
+          <form action="r-addticket.php" method="POST">
+            <input type="hidden" name="UserID" value="<?php print($UserID); ?>">
+            <input type="number" name="azukari" placeholder="預り金" class="validate">
+            <input type="submit" value="決済">
           </form>
-
-          <script src="js/instascan.min.js"></script>
-          <script>
-            var videoTag = document.getElementById('preview');
-            var info = document.getElementById('info');
-            var scanner = new Instascan.Scanner({ video: videoTag });
-
-            scanner.addListener('scan', function(value) {
-              info.value = value;
-              M.toast({html: 'QRコードを読み取りました。'})
-              document.getElementById('sound-file').play();
-            });
-
-            Instascan.Camera.getCameras()
-            .then(function (cameras) {
-
-              //カメラデバイスを取得できているかどうか？
-              if (cameras.length > 0) {
-
-                //スキャンの開始
-                scanner.start(cameras[0]);
-              }
-              else {
-                alert('カメラが見つかりません！');
-              }
-            })
-            .catch(function(err) {
-              alert(err);
-            });
-          </script>
-          <audio id="sound-file" preload="auto">
-            <source src="sound/yomitori.wav" type="audio/wav">
         </div>
       </div>
     </div>
