@@ -128,7 +128,7 @@
                 print('<tr><td>'.$result3['FoodName'].'</td><td>'.$Sheets.'枚</td><td><b>売り切れ</b></td></tr>');
               } else {
                 print('<tr><td>'.$result3['FoodName'].'</td><td>'.$Sheets.'枚</td><td><b>'.$result3['FoodPrice'].'</b></td></tr>');
-                $goukei = $goukei + $result3['FoodPrice'];
+                $goukei = $goukei + ($result3['FoodPrice'] * $Sheets);
               }
             }
           ?>
