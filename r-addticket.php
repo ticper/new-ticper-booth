@@ -14,7 +14,7 @@
   $azukari = $_POST['azukari'];
   $goukei = $_POST['goukei'];
   if($azukari - $goukei  < 0){
-    print("<script>alert('不正なリクエスト'); location.href='r-qrcheck.php';</script>)";
+    print("<script>alert('不正なリクエスト'); location.href='r-qrcheck.php';</script>");
   } else {
   
   }
