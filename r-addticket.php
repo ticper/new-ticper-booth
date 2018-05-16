@@ -25,7 +25,7 @@
      $FoodID = $result['FoodID'];
      $Sheets = $result['Sheets'];
      $sql2 = mysqli_query($db_link, "INSERT INTO tp_ticket(TicketACode, UserID, FoodID, Sheets, Used) VALUES ('$Acode', '$UserID', '$FoodID', '$Sheets', 0)");
-      $sql2 = mysqli_query($db_link, "UPDATE tp_food SET FoodStock = FoodStock - '$Sheets', Bought = Bought - '$Sheets' WHERE FoodID = '$FoodID'");
+      $sql2 = mysqli_query($db_link, "UPDATE tp_food SET FoodStock = FoodStock - '$Sheets', Bought = Bought + '$Sheets' WHERE FoodID = '$FoodID'");
     }
     $sql2 = mysqli_query($db_link, "DELETE FROM tp_cust_carts WHERE UserID = '$UserID'");
   }
