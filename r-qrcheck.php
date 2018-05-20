@@ -5,6 +5,12 @@
   } else {
 
   }
+  if(isset($_POST['num'])){
+    $_SESSION['num'] = $_POST['num'];
+  }
+  if(isset($_SESSION['num']) == '') {
+    $_SESSION['num'] = 0;
+  }
 ?>
 <!DOCTYPE HTML>
 <html lang="ja">
@@ -102,10 +108,21 @@
       <div class="row">
         <div class="col s12">
           <h2>ユーザQR読み取り</h2>
-          <video id="preview"></video>
+          <video id="preview" style="width: 100%;height: 300px;"></video>
           <form action="r-checkuserscart.php" method="GET">
             <input type="text" name="CustID" class="validate" id="info">
             <input type="submit" value="送信" class="btn">
+          </form>
+           <p id="num" hidden><?php print($_SESSION['num']); ?></p>
+          <form action="r-qrcheck.php" method="POST">
+            <?php
+              if($_SESSION['num'] == '0'){
+                print('<input type="hidden" name="num" value="1">');
+              } else {
+                print('<input type="hidden" name="num" value="0">');
+              }
+            ?>
+            <input type="submit" value="カメラを切り替える" class="btn" style="margin-top: 10px;">
           </form>
 
           <script src="js/instascan.min.js"></script>
@@ -125,9 +142,11 @@
 
               //カメラデバイスを取得できているかどうか？
               if (cameras.length > 0) {
+                var num;
+                  num = document.getElementById('num').innerHTML;
 
                 //スキャンの開始
-                scanner.start(cameras[0]);
+                scanner.start(cameras[num]);
               }
               else {
                 alert('カメラが見つかりません！');
