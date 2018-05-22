@@ -53,7 +53,7 @@
       <li><a href="r-qrcheck.php">QRコード</a></li>
       <li><a href="r-kobetsu.php">個別注文</a></li>
       <li><a href="r-return.php">払い戻し</a></li>
-      
+
     </ul>
     <ul id="d-orgfood" class="dropdown-content">
       <li><a href="of-list.php">団体・食品一覧</a></li>
@@ -106,19 +106,25 @@
       <div class="row">
         <div class="row s12">
           <h3>個別注文</h3>
-          <table>
-            <tr><th>商品名</th><th>価格</th><th></th></tr>
+          <table border="2">
             <?php
               require_once('config/config.php');
               $sql = mysqli_query($db_link, "SELECT FoodID, FoodName, FoodPrice, FoodStock FROM tp_food");
+              $now = 0;
+              print('<tr>');
               while($result = mysqli_fetch_assoc($sql)) {
-                print("<tr><td>".$result['FoodName']."</td><td>".$result['FoodPrice'].'</td>');
                 if ($result['FoodStock'] > 0) {
-                  print('<td><form action="r-kobetsu-addcart.php" method="POST"><input type="hidden" name="FoodID" value="'.$result['FoodID'].'"><input type="number" name="maisu" id="maisu" class="validate" placeholder="枚数を入力" max="'.$result['FoodStock'].'"><input type="submit" value="送信" class="btn"></form></td></tr>');
+                  print("<td><a href='r-kobetsu-addcart.php?id=".$result['FoodID']."' class='btn-large'>".$result['FoodName']."</a><br>残り".$result['FoodStock']."枚</td>");
+                  $now = $now + 1;
                 } else {
-                  print('<td>売り切れ</td>');
+                  print('<td><a href="#" class="btn-large red">'.$result['FoodName']."</a><br>売り切れ</a></td>");
+                  $now = $now + 1;
+                }
+                if ($now == 5) {
+                  print("</tr><tr>");
                 }
               }
+              print('</tr>');
             ?>
           </table>
           <a href="r-kobetsu-checkout1.php" class="btn">チェックアウト</a>&nbsp;<a href="r-kobetsu-viewcart.php" class="btn">注文内容を見る</a>
