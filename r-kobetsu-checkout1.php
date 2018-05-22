@@ -53,6 +53,7 @@
       <li><a href="r-qrcheck.php">QRコード</a></li>
       <li><a href="r-kobetsu.php">個別注文</a></li>
       <li><a href="r-return.php">払い戻し</a></li>
+      <li><a href="o-changestatus.php">混雑度変更</a></li>
       
     </ul>
     <ul id="d-orgfood" class="dropdown-content">
