@@ -31,7 +31,7 @@
         print('<script>alert("入力されていない項目があります。"); location.href = "u-addbuser.php";</script>');
     } else { //全て入力されている場合
         // データベースにユーザを登録
-        $sql = mysqli_query($db_link, "INSERT INTO tp_user_booth VALUES ('$h_userid', '$h_username', '$hashed_password')");
+        $sql = mysqli_query($db_link, "INSERT INTO tp_user_booth VALUES ('$h_userid', '$h_username', '$hashed_password','0')");
         // データベースへの登録に失敗した場合
         if (!$sql) {
             print('<script>alert("データベースへの登録に失敗しました。"); location.href = "u-addbuser.php";</script>');

@@ -12,7 +12,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-
+    
 		<meta name="author" content="Ticper Team" />
 		<meta name="description" content="個別会計で発行した食券を表示します。" />
 		<meta property="og:site_name" content="Ticper" />
