@@ -107,7 +107,7 @@
     </script>
     <div class="container">
       <div class="row">
-        <h3>ステータスチェック</h3>
+        <h3>Adminステータスチェック</h3>
         <p>ユーザーIDを入力して下さい。</p>
         <form class="col s12" action="check-user-do.php" method="POST">
           <div class="row">
