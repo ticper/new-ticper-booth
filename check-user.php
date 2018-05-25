@@ -3,7 +3,14 @@
   if(isset($_SESSION['UserID']) == '') {
     print("<script>location.href = 'index.php';</script>");
   } else {
-
+    require_once('config/config.php');
+    $userid = $_SESSION['UserID'];
+    $sql = mysqli_query($db_link,"SELECT SuperUser FROM tp_user_booth WHERE UserID = '$userid'");
+    $result = mysqli_fetch_assoc($sql);
+    $root = $result['SuperUser'];
+    if($root != 1){
+      print("<script>alert('このページは管理者以外閲覧できません');location.href = 'home.php';</script>");
+    }
   }
 ?>
 <!DOCTYPE HTML>
@@ -19,7 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- ページタイトル -->
-    <title>メニュー - Ticper</title>
+    <title>Admin ステータスチェック - Ticper</title>
 
     <!-- jQuery(フレームワーク)導入 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
