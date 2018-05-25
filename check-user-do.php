@@ -108,7 +108,7 @@
     <div class="container">
       <div class="row">
         <?php 
-          $userid = $_POST['userid'];
+          $userid = $_GET['userid'];
           print('<h3>'.$userid.'のステータス</h3>');
         ?>
         <table>
@@ -142,7 +142,7 @@
                  } else if($used == 1) {
                    print('<td>使用済み</td>');
                  }
-                 print('<td><a href="change-status.php?acode='.$acode.'"><p class="btn red">変更する</p></a></td>');
+                 print('<td><a href="change-status.php?acode='.$acode.'&foodname='.$foodname.'&userid='.$userid.'"><p class="btn red">変更する</p></a></td>');
                 }
               }
             ?>

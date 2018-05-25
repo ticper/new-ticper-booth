@@ -26,7 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- ページタイトル -->
-    <title>Admin ステータスチェック - Ticper</title>
+    <title>Adminステータスチェンジ - Ticper</title>
 
     <!-- jQuery(フレームワーク)導入 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -73,9 +73,7 @@
           <a href="#!user"><img class="circle" src="http://www.yamabuki-hs.metro.tokyo.jp/site/tei/content/000026901.jpg"></a>
           <a href="#!name" style="color: white;">
             <?php
-              $UserID = $_SESSION['UserID'];
-              require_once('config/config.php');
-              $sql = mysqli_query($db_link, "SELECT UserName FROM tp_user_booth WHERE UserID = '$UserID'");
+              $sql = mysqli_query($db_link, "SELECT UserName FROM tp_user_booth WHERE UserID = '$userid'");
               $result = mysqli_fetch_assoc($sql);
               print($result['UserName']);
             ?>
@@ -107,19 +105,40 @@
     </script>
     <div class="container">
       <div class="row">
-        <h3>Adminステータスチェック</h3>
-        <p>ユーザーIDを入力して下さい。</p>
-        <form class="col s12" action="check-user-do.php" method="GET">
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="userid" name="userid" class="validate" type="text" required>
-              <label for="userid">ユーザID</label>
-            </div>
-            <div class="input-field col s12">
-              <input type="submit" value="送信" class="btn">
-            </div>
+        <?php 
+          $acode = $_GET['acode'];
+          $foodname = $_GET['foodname'];
+          $userid = $_GET['userid'];
+          $sql = mysqli_query($db_link,"SELECT Sheets,Used FROM tp_ticket WHERE TicketACode = '$acode'");
+          $result = mysqli_fetch_assoc($sql);
+          $sheets = $result['Sheets'];
+          $used = $result['Used'];
+          print('<h3>'.$acode.'のステータス</h3>');
+          print('<h4>'.$foodname.'</h4>');
+          print('<form action="change-status-do.php?userid='.$userid.' method="POST" class=" col 12 s12">');
+        ?>
+          <div class="input-field col s12">
+            <?php print('<input id="sheets" name="sheets" class="validate" type="text" min="0" name="sheets" value="'.$sheets.'" required>'); ?>
+            <label for="sheets">枚数</label>
           </div>
+          <div class="input-field col s12">
+            <?php 
+              if($used == 0){
+                print('<select name="used"><option value="0" selected>未使用</option><option value="1">使用済み</option></select>');
+              } else {
+                print('<select name="used"><option value="0">未使用</option><option value="1" selected>使用済み</option></select>');
+              }
+              ?>
+            <label>ステータス</label>
+          </div>
+          <?php print('<input type="hidden" value="'.$acode.'" name="acode">'); ?>
+          <input type="submit" class="btn" value="送信">
         </form>
+        <script type="text/javascript">
+          $(document).ready(function(){
+            $('select').formSelect();
+          });
+        </script>
       </div>
     </div>
   </body>
