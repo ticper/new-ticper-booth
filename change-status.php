@@ -115,10 +115,10 @@
           $used = $result['Used'];
           print('<h3>'.$acode.'のステータス</h3>');
           print('<h4>'.$foodname.'</h4>');
-          print('<form action="change-status-do.php?userid='.$userid.' method="POST" class=" col 12 s12">');
+          print('<form action="change-status-do.php?userid='.$userid.'" method="POST" class=" col 12 s12">');
         ?>
           <div class="input-field col s12">
-            <?php print('<input id="sheets" name="sheets" class="validate" type="text" min="0" name="sheets" value="'.$sheets.'" required>'); ?>
+            <?php print('<input id="sheets" name="sheets" class="validate" type="number" min="0" name="sheets" value="'.$sheets.'" required>'); ?>
             <label for="sheets">枚数</label>
           </div>
           <div class="input-field col s12">
