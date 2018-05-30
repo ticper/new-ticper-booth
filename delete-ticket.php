@@ -10,6 +10,7 @@
     $foodid = $_POST['foodid'];
 
     $sql = mysqli_query($db_link,"UPDATE tp_food SET FoodStock = FoodStock + '$sheets', Bought = Bought - '$sheets' WHERE FoodID = '$foodid'");
+
     $sql2 = mysqli_query($db_link,"DELETE FROM tp_ticket WHERE TicketACode = '$acode'");
   }
 ?>
