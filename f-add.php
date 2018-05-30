@@ -44,6 +44,7 @@
       <li><a href="u-list.php">ユーザ一覧</a></li>
       <li><a href="u-addbuser.php">会計ユーザ登録</a></li>
       <li><a href="u-addouser.php">団体ユーザ登録</a></li>
+      <li><a href="u-addauser.php">文実ユーザ登録</a></li>
     </ul>
     <ul id="d-recept" class="dropdown-content">
       <li><a href="r-qrcheck.php">QRコード</a></li>
