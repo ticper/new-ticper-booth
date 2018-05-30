@@ -110,6 +110,7 @@
         <?php 
           $userid = $_GET['userid'];
           print('<h3>'.$userid.'のステータス</h3>');
+          print('<a href="change-password.php" class="btn">パスワードを変更する</a>')
         ?>
         <table>
           <thead>
