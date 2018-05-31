@@ -141,7 +141,7 @@
                 <form action="delete-ticket.php" method="POST">
                   <input type="hidden" name="acode" value="'.$acode.'">
                   <input type="hidden" name="foodid" value="'.$foodid.'">
-                  <input type="hidden" name="sheets" value"'.$sheets.'">
+                  <input type="hidden" name="sheets" value="'.$sheets.'">
                   <input type="hidden" name="price" value="'.$s_foodprice.'">
                   <input type="submit" class="btn" value="送信">
                 </form>
