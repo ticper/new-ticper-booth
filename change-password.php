@@ -118,22 +118,33 @@
         ?>
         <p class="red-text">パスワードを変更しようとしています。</p>
         <?php
-          print('<form class="col s12" action="change-password-do.php?userid='.$userid.'" method="POST">');
+          $sql = mysqli_query($db_link,"SELECT * FROM tp_user_cust WHERE UserID = '$userid'");
+          $result = mysqli_fetch_assoc($sql);
+          $username = $result['UserName'];
+
+          if($username != '') {
+            print('
+            <form class="col s12" action="change-password-do.php?userid='.$userid.'" method="POST">
+             <div class="row">
+                <div class="input-field col s12">
+                 <input type="password" name="password" id="password" required>
+                  <label for="password">password</label>
+                </div>
+                <div class="input-field col s12">
+                 <input type="password" name="confirm" id="confirm" required>
+                  <label for="confirm">confirm</label>
+               </div>
+                <div class="input-field col s12">
+                  <input type="submit" class="btn" value="送信">
+                </div>
+             </div>
+           </form>
+           ');
+          } else {
+            print('<h3>ユーザーが存在しません</h3>');
+            print('<a href="check-user.php" class="btn">戻る</a>');
+          }
         ?>
-          <div class="row">
-            <div class="input-field col s12">
-              <input type="password" name="password" id="password" required>
-              <label for="password">password</label>
-            </div>
-            <div class="input-field col s12">
-              <input type="password" name="password-c" id="password-c" required>
-              <label for="password-c">confirm</label>
-            </div>
-            <div class="input-field col s12">
-              <input type="submit" class="btn" value="送信">
-            </div>
-          </div>
-        </form>
       </div>
     </div>
   </body>

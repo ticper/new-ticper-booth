@@ -110,8 +110,17 @@
       <div class="row">
         <?php 
           $userid = $_GET['userid'];
-          print('<h3>'.$userid.'のステータス</h3>');
-          print('<a href="change-password.php?userid='.$userid.'" class="btn">パスワードを変更する</a>');
+          $sql = mysqli_query($db_link,"SELECT * FROM tp_user_cust WHERE UserID = '$userid'");
+          $result = mysqli_fetch_assoc($sql);
+          $username = $result['UserName'];
+
+          if($username != '') {
+            print('<h3>'.$userid.'のステータス</h3>');
+            print('<a href="change-password.php?userid='.$userid.'" class="btn">パスワードを変更する</a>');
+          } else {
+            print('<h3>ユーザーが存在しません</h3>');
+            print('<a href="check-user.php" class="btn">戻る</a>');
+          }
         ?>
         <table>
           <thead>
