@@ -90,7 +90,7 @@
           <div class="background">
             <img width="100%" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Yamabuki_High_School.JPG/1200px-Yamabuki_High_School.JPG">
           </div>
-          <a href="#!user"><img class="circle" src="http://www.yamabuki-hs.metro.tokyo.jp/site/tei/content/000026901.jpg"></a>
+          <a href="#!user"><img class="circle" src="img/icon.jpg"></a>
           <a href="#!name" style="color: white;">
             <?php
               $UserID = $_SESSION['UserID'];
