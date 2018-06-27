@@ -37,9 +37,9 @@
         $sql = mysqli_query($db_link, "INSERT INTO tp_user_org VALUES ('$h_userid', '$h_username', '$hashed_password', '$orgid')");
         // データベースへの登録に失敗した場合
         if (!$sql) {
-            print('<script>alert("データベースへの登録に失敗しました。"); location.href = "u-addbuser.php";</script>');
+            print('<script>alert("データベースへの登録に失敗しました。"); location.href = "u-addouser.php";</script>');
         } else { // 成功した場合
-            print('<script>alert("登録しました。"); location.href = "u-addbuser.php";</script>');
+            print('<script>alert("登録しました。"); location.href = "u-addouser.php";</script>');
         }
     }
 ?>
