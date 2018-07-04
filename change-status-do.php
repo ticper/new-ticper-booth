@@ -4,6 +4,7 @@
     print("<script>location.href = 'index.php';</script>");
   } else {
     require_once('config/config.php');
+    $hostuserid = $_SESSION['UserID'];
     $userid = $_SESSION['UserID'];
     $sql = mysqli_query($db_link,"SELECT SuperUser FROM tp_user_booth WHERE UserID = '$userid'");
     $result = mysqli_fetch_assoc($sql);
@@ -24,7 +25,8 @@
 
       $r_used = $db_link -> real_escape_string($used);
       $h_used = htmlspecialchars($r_used, ENT_QUOTES);
-
+      $message = "食券番号「".$h_acode."」のステータスを変更しました。";
+			$sql = mysqli_query($db_link, "INSERT INTO tp_log VALUES (CURRENT_TIMESTAMP, '$message', '$hostuserid', '', '')");
       $sql = mysqli_query($db_link, "UPDATE tp_ticket SET Sheets = '$h_sheets' , Used = '$h_used' WHERE TicketACode = '$h_acode'");
       print("<script>alert('変更しました');location.href = 'check-user-do.php?userid=".$u_id."';</script>");
     }
