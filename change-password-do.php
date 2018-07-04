@@ -4,7 +4,7 @@
 		print("<script>location.href = 'index.php';</script>");
 	} else {
 		require_once('config/config.php');
-		$userid = $_SESSION['UserID'];
+		$hostuserid = $_SESSION['UserID'];
 		$sql = mysqli_query($db_link,"SELECT SuperUser FROM tp_user_booth WHERE UserID = '$userid'");
 		$result = mysqli_fetch_assoc($sql);
 		$root = $result['SuperUser'];
@@ -40,6 +40,8 @@
 						if(!$sql){
 							print('<script>alert("不正なリクエスト");location.href = "change-password.php?userid='.$userid.'";</script>');
 						} else {
+							$message = $userid."さんのパスワードを変更しました。";
+							$sql = mysqli_query($db_link, "INSERT INTO tp_log VALUES (CURRENT_TIMESTAMP, $message, $hostuserid, '', '')");
 							print('<script>alert("パスワードを変更しました");location.href = "check-user.php";</script>');
 						}
 					} 
