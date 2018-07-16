@@ -1,4 +1,9 @@
 <?php
+	session_start();
+	if(isset($_SESSION['UserID']) == '') {
+		print("<script>location.href = 'index.php';</script>");
+	} else {
+		$hostuserid = $_SESSION['UserID'];
 	//コンフィグを読み込み
 	require_once('config/config.php');
 
@@ -25,6 +30,10 @@
 
 	//食品情報をUPDATEする。
 	$sql = mysqli_query($db_link,"UPDATE tp_food SET FoodName = '$h_FoodName',OrgID = '$h_OrgID',FoodDescription = '$e_FoodDescription',FoodPrice = '$e_FoodPrice' WHERE FoodID = '$h_FoodID'");
+	
+	$message = "食品".$foodid."を編集しました。";
+	$sql = mysqli_query($db_link, "INSERT INTO tp_log VALUES (CURRENT_TIMESTAMP, '$message', '$hostuserid', '', '')");
 
 	print("<script>alert('登録情報の編集が完了しました。詳しくは団体食品一覧を御覧ください。');location.href = 'of-list.php';</script>");
+	}
 ?>

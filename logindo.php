@@ -21,8 +21,9 @@
     // セッション
     session_start();
     $_SESSION['UserID'] = $e_userid;
-    $logMessage = "会計用Ticperにログイン";
-    $sql = mysqli_query($db_link, "INSERT INTO tp_log ('Time', 'Action', 'BoothUserID') VALUES (CURRENT_TIMESTAMP, '$logMessage', '$e_userid')");
+    $message = $_SESSION['UserID']."さんがログインしました。";
+		$hostuserid = $_SESSION['UserID'];
+		$sql = mysqli_query($db_link, "INSERT INTO tp_log VALUES (CURRENT_TIMESTAMP, '$message', '$hostuserid', '', '')");
     print('<script>location.href = "home.php";</script>');
   } else {
     print('<script>alert("ユーザ名またはパスワードが違います。"); location.href = "index.php"; </script>');
