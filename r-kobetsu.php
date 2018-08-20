@@ -105,27 +105,46 @@
     </script>
     <div class="container">
       <div class="row">
-        <div class="row s12">
+        <div class="col s12">
           <h3>個別注文</h3>
           <table border="2">
             <?php
               require_once('config/config.php');
-              $sql = mysqli_query($db_link, "SELECT FoodID, FoodName, FoodPrice, FoodStock FROM tp_food");
-              $now = 0;
-              print('<tr>');
-              while($result = mysqli_fetch_assoc($sql)) {
-                if ($result['FoodStock'] > 0) {
-                  print("<td><a href='r-kobetsu-addcart.php?id=".$result['FoodID']."' class='btn-large'>".$result['FoodName']."</a><br>残り".$result['FoodStock']."枚</td>");
-                  $now = $now + 1;
-                } else {
-                  print('<td><a href="#" class="btn-large red">'.$result['FoodName']."</a><br>売り切れ</a></td>");
-                  $now = $now + 1;
+              $sql = mysqli_query($db_link, "SELECT OrgID, OrgName FROM tp_org");
+              while($result1 = mysqli_fetch_assoc($sql)) {
+                print('<h5><b>'.$result1['OrgName'].'</b></h5>');
+                $orgid = $result1['OrgID'];
+                print('<div class="row">');
+                $sql2 = mysqli_query($db_link, "SELECT FoodID, FoodName, FoodPrice, FoodStock FROM tp_food WHERE OrgID = '$orgid'");
+                while($result2 = mysqli_fetch_assoc($sql2)) {
+                  if($result2['FoodStock'] == 0) {
+                    print('<div class="col s12 m6">');
+                    print('<div class="card red">');
+                    print('<div class="card-content white-text">');
+                    print('<span class="card-title"><b>'.$result2['FoodName'].'</b></span>');
+                    print('<span class="new badge red" data-badge-caption="売り切れ"></span>');
+                    print('</div>');
+                    print('<div class="card-action">');
+                    print('<b>売り切れ</b>');
+                    print('</div>');
+                    print("</div>");
+                    print('</div>');
+                  } else {
+                    print('<div class="col s12 m6">');
+                    print('<div class="card">');
+                    print('<div class="card-content">');
+                    print('<span class="card-title"><b>'.$result2['FoodName'].'</b></span>');
+                    print('<span class="new badge blue" data-badge-caption="枚">'.$result2['FoodStock'].'</span>');
+                    print('</div>');
+                    print('<div class="card-action">');
+                    print('<form action="r-kobetsu-addcart.php" method="POST"><input type="hidden" name="fi" value="'.$result2['FoodID'].'"><input type="number" name="kz" placeholder="欲しい枚数を入力" required><button type="submit" class="btn">カートに追加</button></form>');
+                    print('</div>');
+                    print('</div>');
+                    print('</div>');
+                  }
                 }
-                if ($now == 5) {
-                  print("</tr><tr>");
-                }
+                print('</div>');
               }
-              print('</tr>');
             ?>
           </table>
           <a href="r-kobetsu-checkout1.php" class="btn">チェックアウト</a>&nbsp;<a href="r-kobetsu-viewcart.php" class="btn">注文内容を見る</a>

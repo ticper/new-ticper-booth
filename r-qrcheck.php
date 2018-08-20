@@ -110,7 +110,7 @@
         <div class="col s12">
           <h2>ユーザQR読み取り</h2>
           <video id="preview" style="width: 100%;height: 300px;"></video>
-          <form action="r-checkuserscart.php" method="GET">
+          <form action="r-checkuserscart.php" method="GET" name="cf">
             <input type="text" name="CustID" class="validate" id="info">
             <input type="submit" value="送信" class="btn">
           </form>
@@ -136,6 +136,7 @@
               info.value = value;
               M.toast({html: 'QRコードを読み取りました。'})
               document.getElementById('sound-file').play();
+              document.cf.submit();
             });
 
             Instascan.Camera.getCameras()
@@ -159,6 +160,7 @@
           </script>
           <audio id="sound-file" preload="auto">
             <source src="sound/yomitori.wav" type="audio/wav">
+          </audio>
         </div>
       </div>
     </div>

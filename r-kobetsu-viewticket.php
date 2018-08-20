@@ -106,7 +106,7 @@
     					$sql = mysqli_query($db_link, "SELECT * FROM tp_ticket WHERE CartID = '$CartID'");
     					while ($result = mysqli_fetch_assoc($sql)) {
     						print('<div class="col s6 m4">');
-    						print('<img src="https://api.qrserver.com/v1/create-qr-code/?data='.$result['TicketACode'].'&size=200x200" alt="QRコード" /><br>');
+    						print('<img src="https://chart.apis.google.com/chart?chs=300x300&cht=qr&chl='.$result['TicketACode'].'" alt="QRコード" /><br>');
     						$foodid = $result['FoodID'];
     						$sql2 = mysqli_query($db_link, "SELECT FoodName, OrgID, FoodPrice FROM tp_food WHERE FoodID = '$foodid'");
     						$result2 = mysqli_fetch_assoc($sql2);
