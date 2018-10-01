@@ -24,7 +24,7 @@
      $Acode = rand(100000, 999999);
      $FoodID = $result['FoodID'];
      $Sheets = $result['Sheets'];
-     $sql2 = mysqli_query($db_link, "INSERT INTO tp_ticket(TicketACode, UserID, FoodID, Sheets, Used, Requested) VALUES ('$Acode', '$UserID', '$FoodID', '$Sheets', 0, 0)");
+     $sql2 = mysqli_query($db_link, "INSERT INTO tp_ticket(TicketACode, UserID, FoodID, Sheets, Used) VALUES ('$Acode', '$UserID', '$FoodID', '$Sheets', 0)");
       $sql2 = mysqli_query($db_link, "UPDATE tp_food SET FoodStock = FoodStock - '$Sheets', Bought = Bought + '$Sheets' WHERE FoodID = '$FoodID'");
     }
     $sql2 = mysqli_query($db_link, "DELETE FROM tp_cust_carts WHERE UserID = '$UserID'");
@@ -76,6 +76,7 @@
       <li><a href="r-kobetsu.php">個別注文</a></li>
       <li><a href="r-return.php">払い戻し</a></li>
       <li><a href="o-changestatus.php">混雑度変更</a></li>
+
     </ul>
     <ul id="d-orgfood" class="dropdown-content">
       <li><a href="of-list.php">団体・食品一覧</a></li>
@@ -104,7 +105,6 @@
       <li><a href="#!" class="dropdown-trigger" data-target="d-recept">受付<i class="material-icons right">arrow_drop_down</i></a></li>
       <li><a href="#!" class="dropdown-trigger" data-target="d-orgfood">データ管理<i class="material-icons right">arrow_drop_down</i></a></li>
       <li><a href="#!" class="dropdown-trigger" data-target="d-userc">ユーザ管理<i class="material-icons right">arrow_drop_down</i></a></li>
-      <li><a href="t-news.php">ニュース</a></li>
       <li class="divider"></li>
       <li><a href="logout.php">ログアウト</a></li>
     </ul>
@@ -121,9 +121,8 @@
     </nav>
     <script>
       $(".dropdown-trigger").dropdown();
-      $(document).ready(function(){
+      $(function(){
         $('.sidenav').sidenav();
-        M.toast({html: '<?php print($result['UserName']); ?>さんとしてログインしました。'})
       });
     </script>
     <div class="container">

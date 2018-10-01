@@ -50,7 +50,6 @@
       <li><a href="u-list.php">ユーザ一覧</a></li>
       <li><a href="u-addbuser.php">会計ユーザ登録</a></li>
       <li><a href="u-addouser.php">団体ユーザ登録</a></li>
-      <li><a href="u-addauser.php">文実ユーザ登録</a></li>
     </ul>
     <ul id="d-recept" class="dropdown-content">
       <li><a href="r-qrcheck.php">QRコード</a></li>
@@ -85,7 +84,6 @@
       <li><a href="#!" class="dropdown-trigger" data-target="d-recept">受付<i class="material-icons right">arrow_drop_down</i></a></li>
       <li><a href="#!" class="dropdown-trigger" data-target="d-orgfood">データ管理<i class="material-icons right">arrow_drop_down</i></a></li>
       <li><a href="#!" class="dropdown-trigger" data-target="d-userc">ユーザ管理<i class="material-icons right">arrow_drop_down</i></a></li>
-      <li><a href="t-news.php">ニュース</a></li>
       <li class="divider"></li>
       <li><a href="logout.php">ログアウト</a></li>
     </ul>
@@ -104,7 +102,6 @@
       $(".dropdown-trigger").dropdown();
       $(document).ready(function(){
         $('.sidenav').sidenav();
-        M.toast({html: '<?php print($result['UserName']); ?>さんとしてログインしました。'})
       });
     </script>
     <div class="container">
