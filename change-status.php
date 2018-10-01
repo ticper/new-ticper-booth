@@ -74,7 +74,9 @@
           <a href="#!user"><img class="circle" src="img/icon.jpg"></a>
           <a href="#!name" style="color: white;">
             <?php
-              $sql = mysqli_query($db_link, "SELECT UserName FROM tp_user_booth WHERE UserID = '$userid'");
+              $UserID = $_SESSION['UserID'];
+              require_once('config/config.php');
+              $sql = mysqli_query($db_link, "SELECT UserName FROM tp_user_booth WHERE UserID = '$UserID'");
               $result = mysqli_fetch_assoc($sql);
               print($result['UserName']);
             ?>
@@ -84,6 +86,7 @@
       <li><a href="#!" class="dropdown-trigger" data-target="d-recept">受付<i class="material-icons right">arrow_drop_down</i></a></li>
       <li><a href="#!" class="dropdown-trigger" data-target="d-orgfood">データ管理<i class="material-icons right">arrow_drop_down</i></a></li>
       <li><a href="#!" class="dropdown-trigger" data-target="d-userc">ユーザ管理<i class="material-icons right">arrow_drop_down</i></a></li>
+      <li><a href="t-news.php">ニュース</a></li>
       <li class="divider"></li>
       <li><a href="logout.php">ログアウト</a></li>
     </ul>
@@ -102,6 +105,7 @@
       $(".dropdown-trigger").dropdown();
       $(document).ready(function(){
         $('.sidenav').sidenav();
+        M.toast({html: '<?php print($result['UserName']); ?>さんとしてログインしました。'})
       });
     </script>
     <div class="container">
