@@ -5,7 +5,8 @@
     // カートIDを抜き取り
     $CartID = $_SESSION['CartID'];
     // 食品IDと枚数を取得
-    $FoodID = $_GET['id'];
+    $FoodID = $_POST['fi'];
+    $maisu = $_POST['kz'];
 
     // コンフィグを取得
     require_once('config/config.php');
