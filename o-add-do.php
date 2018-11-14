@@ -22,7 +22,7 @@
 	$e_orgname = $db_link -> real_escape_string($orgname);
 	$e_orgplace = $db_link -> real_escape_string($orgplace);
 
-	$sql = mysqli_query($db_link, "INSERT INTO tp_org VALUES ('$orgid', '$orgname', '$orgplace')");
+	$sql = mysqli_query($db_link, "INSERT INTO tp_org VALUES ('$orgid', '1', '$orgname', '$orgplace', '0')");
 
 ?>
 <script>

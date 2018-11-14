@@ -26,12 +26,12 @@
 		
 
 		// 最新の食品数を取得して食品数+1したデータをFoodIDにする。
-		$sql = mysqli_query($db_link, "SELECT MAX(FoodID) AS num FROM tp_food");
+		$sql = mysqli_query($db_link, "SELECT COUNT(FoodID) AS num FROM tp_food");
 		$result = mysqli_fetch_assoc($sql);
 		$FoodID = $result['num'] + 1;
 
 		// 食品登録
-		$sql = mysqli_query($db_link, "INSERT INTO tp_food(FoodID,FoodName,OrgID,FoodDescription,FoodPrice,FoodStockFrom,FoodStock,Bought,Used) VALUES ('$FoodID', '$FoodName', '$OrgID', '$FoodDescription', '$FoodPrice', '$FoodStock', '$FoodStock', '0', '0')");
+		$sql = mysqli_query($db_link, "INSERT INTO tp_food(FoodID,FoodName,OrgID,FoodDescription,FoodPrice,FoodStockFrom,FoodStock,Bought,Used,cooked,Got) VALUES ('$FoodID', '$FoodName', '$OrgID', '$FoodDescription', '$FoodPrice', '$FoodStock', '$FoodStock', '0', '0', '0', '0')");
 		$message = "食品".$FoodID."を追加しました。";
 		$hostuserid = $_SESSION['UserID'];
 		$sql = mysqli_query($db_link, "INSERT INTO tp_log VALUES (CURRENT_TIMESTAMP, '$message', '$hostuserid', '', '')");
