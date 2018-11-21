@@ -111,7 +111,7 @@
             print('<hr />');
             $sql = mysqli_query($db_link, "SELECT FoodStockFrom, FoodStock, Bought, Used, Bought - Used AS num FROM tp_food WHERE FoodID = '$foodid'");
             $result2 = mysqli_fetch_assoc($sql);
-            $sql = mysqli_query($db_link, "SELECT count(*) AS num FROM tp_ticket WHERE FoodID = '$foodid' AND Requested = 1");
+            $sql = mysqli_query($db_link, "SELECT count(*) AS num FROM tp_ticket WHERE FoodID = '$foodid' AND Used = 1");
             $result3 = mysqli_fetch_assoc($sql);
             print('<h5>食券総枚数</h5>'.$result2['FoodStockFrom'].'枚<hr />');
             print('<h5>販売済み枚数</h5>'.$result2['Bought'].'枚<hr />');
