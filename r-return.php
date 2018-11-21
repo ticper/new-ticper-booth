@@ -110,7 +110,7 @@
     <div class="container">
       <div class="row">
         <div class="col s12">
-          <h2>ユーザQR読み取り</h2>
+          <h2>食券QR読み取り</h2>
           <video id="preview" style="width: 100%;height: 300px;"></video>
           <form action="r-return-do.php" method="GET">
             <input type="text" name="Acode" class="validate" id="info">
