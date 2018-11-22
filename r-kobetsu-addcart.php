@@ -1,28 +1,22 @@
 <?php
-    // セッションを開始
     session_start();
-
-    // カートIDを抜き取り
     $CartID = $_SESSION['CartID'];
-    // 食品IDと枚数を取得
     $FoodID = $_POST['fi'];
-    $maisu = $_POST['kz'];
-
-    // コンフィグを取得
+    $Sheets = $_POST['kz'];
+    
     require_once('config/config.php');
-
-    // MySQLの特殊文字を排除
-    $r_FoodID = $db_link -> real_escape_string($FoodID);
-
-    // HTMLの特殊文字を排除
-    $h_FoodID = htmlspecialchars($r_FoodID, ENT_QUOTES);
-
-    $sql = mysqli_query($db_link, "SELECT Sheets FROM tp_kobetsu_carts WHERE FoodID = '$h_FoodID' AND CartID = '$CartID'");
+    
+    $sql = mysqli_query($db_link, "SELECT CartID, FoodID, Sheets FROM tp_kobetsu_carts WHERE CartID = '$CartID' AND FoodID = '$FoodID'");
     $result = mysqli_fetch_assoc($sql);
-    if($result['Sheets'] != 0) {
-      $sql = mysqli_query($db_link, "UPDATE tp_kobetsu_carts SET Sheets = Sheets + '1' WHERE CartID = '$CartID' AND FoodID = '$h_FoodID'");
-    } else {
-      $sql = mysqli_query($db_link, "INSERT INTO tp_kobetsu_carts VALUES ('$CartID', '$h_FoodID', '1')");
+    
+    if($result['FoodID'] == $FoodID) {
+        $Sheets = $Sheets + $result['Sheets'];
+        $sql = mysqli_query($db_link, "UPDATE tp_kobetsu_carts SET Sheets = '$Sheets' WHERE CartID = '$CartID' AND FoodID = '$FoodID'");
+        header('Location: r-kobetsu.php');
+        exit();
+    } elseif ($result['FoodID'] != $FoodID) {
+        $sql = mysqli_query($db_link, "INSERT INTO tp_kobetsu_carts VALUES ('$CartID', '$FoodID', '$Sheets')");
+        header('Location: r-kobetsu.php');
+        exit();
     }
-    print('<script>location.href = "r-kobetsu.php";</script>');
 ?>

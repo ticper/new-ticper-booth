@@ -4,11 +4,6 @@
         print("<script>location.href = 'index.php';</script>");
     } else {
     }
-    if(isset($_SESSION['CartID']) == '') {
-        $_SESSION['CartID'] = rand(100000, 999999);
-    } else {
-
-    }
 ?>
 <!DOCTYPE HTML>
 <html lang="ja">
@@ -109,47 +104,47 @@
       <div class="row">
         <div class="col s12">
           <h3>個別注文</h3>
-          <table border="2">
             <?php
+              if(isset($_SESSION['CartID']) == '') {
+                $CartID = rand(111111,999999);
+                $_SESSION['CartID'] = $CartID;
+              } else {
+                $CartID = $_SESSION['CartID'];
+              }
+              print('<h4>カートID:'.$CartID.'</h4>');
+              print('<a href="r-kobetsu-viewticket.php" class="btn-large">食券を発行</a>');
+              $sql = mysqli_query($db_link, "SELECT FoodID, Sheets FROM tp_kobetsu_carts WHERE CartID = '$CartID'");
+              $goukei = 0;
+              while($result = mysqli_fetch_assoc($sql)) {
+                $FoodID = $result['FoodID'];
+                $sql2 = mysqli_query($db_link, "SELECT FoodPrice FROM tp_food WHERE FoodID = '$FoodID'");
+                $result2 = mysqli_fetch_assoc($sql2);
+                $goukei = $goukei + ($result['Sheets'] * $result2['FoodPrice']);
+              }
+              print('<h4>合計:'.$goukei.'円</h4>');
               require_once('config/config.php');
               $sql = mysqli_query($db_link, "SELECT OrgID, OrgName FROM tp_org");
-              while($result1 = mysqli_fetch_assoc($sql)) {
-                print('<h5><b>'.$result1['OrgName'].'</b></h5>');
-                $orgid = $result1['OrgID'];
-                print('<div class="row">');
-                $sql2 = mysqli_query($db_link, "SELECT FoodID, FoodName, FoodPrice, FoodStock FROM tp_food WHERE OrgID = '$orgid'");
+              print('<table>');
+              print('<tr><th>食品名</th><th>予約枚数</th><th>提供可能数</th><th><th>入力</th></tr>');
+              while($result = mysqli_fetch_assoc($sql)) {
+                print('<tr><th colspan="5">'.$result['OrgName'].'</th></tr>');
+                $orgid = $result['OrgID'];
+                $sql2 = mysqli_query($db_link, "SELECT FoodID, FoodName, FoodStock FROM tp_food WHERE OrgID = '$orgid'");
                 while($result2 = mysqli_fetch_assoc($sql2)) {
-                  if($result2['FoodStock'] == 0) {
-                    print('<div class="col s12 m6">');
-                    print('<div class="card red">');
-                    print('<div class="card-content white-text">');
-                    print('<span class="card-title"><b>'.$result2['FoodName'].'</b></span>');
-                    print('<span class="new badge red" data-badge-caption="売り切れ"></span>');
-                    print('</div>');
-                    print('<div class="card-action">');
-                    print('<b>売り切れ</b>');
-                    print('</div>');
-                    print("</div>");
-                    print('</div>');
-                  } else {
-                    print('<div class="col s12 m6">');
-                    print('<div class="card">');
-                    print('<div class="card-content">');
-                    print('<span class="card-title"><b>'.$result2['FoodName'].'</b></span>');
-                    print('<span class="new badge blue" data-badge-caption="枚">'.$result2['FoodStock'].'</span>');
-                    print('</div>');
-                    print('<div class="card-action">');
-                    print('<form action="r-kobetsu-addcart.php" method="POST"><input type="hidden" name="fi" value="'.$result2['FoodID'].'"><input type="number" name="kz" placeholder="欲しい枚数を入力" required><button type="submit" class="btn">カートに追加</button></form>');
-                    print('</div>');
-                    print('</div>');
-                    print('</div>');
+                  print('<tr><td>'.$result2['FoodName'].'</td>');
+                  $FoodID = $result2['FoodID'];
+                  $sql3 = mysqli_query($db_link, "SELECT Sheets FROM tp_kobetsu_carts WHERE CartID = '$CartID' AND FoodID = '$FoodID'");
+                  $result3 = mysqli_fetch_assoc($sql3);
+                  print('<td>'.$result3['Sheets'].'枚</td>');
+                  if($result2['FoodStock'] == '0') {
+                    print('<td>売り切れ</td><td></td>');
+                  } elseif($result2['FoodStock'] != '0') {
+                    print('<td>'.$result2['FoodStock'].'枚</td><td><form action="r-kobetsu-addcart.php" method="POST"><input type="hidden" name="fi" value="'.$result2['FoodID'].'"><input type="number" name="kz" class="validate" required><button type="submit" class="btn">追加</button></form></td></tr>');
                   }
                 }
-                print('</div>');
               }
+              $_SESSION['CartID'] = $CartID;
             ?>
-          </table>
-          <a href="r-kobetsu-checkout1.php" class="btn">チェックアウト</a>&nbsp;<a href="r-kobetsu-viewcart.php" class="btn">注文内容を見る</a>
         </div>
       </div>
     </div>
