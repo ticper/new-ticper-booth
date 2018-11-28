@@ -8,8 +8,13 @@
     $sheets = $_POST['sheets'];
     $price = $_POST['price'];
     $foodid = $_POST['foodid'];
+    $sql0 = mysqli_query($db_link,"SELECT Used FROM tp_food WHERE FoodID = '$foodid'");
+    $result0 = mysqli_fetch_assoc($sql0);
     $sql = mysqli_query($db_link,"UPDATE tp_food SET FoodStock = FoodStock + '$sheets', Bought = Bought - '$sheets' WHERE FoodID = '$foodid'");
     $sql2 = mysqli_query($db_link,"DELETE FROM tp_ticket WHERE TicketACode = '$acode'");
+    if ($result0['Used'] == 1) {
+      $sql3 = mysqli_query($db_link,"UPDATE tp_food SET cooked = cooked - '$sheets'");
+    }
   }
 ?>
 <!DOCTYPE HTML>
