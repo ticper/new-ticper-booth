@@ -12,6 +12,7 @@
 		$FoodDescription = $_POST['FoodDescription'];
 		$FoodPrice = $_POST['FoodPrice'];
 		$FoodStock = $_POST['FoodStock'];
+		$cook = $_POST['cook'];
 
 		// さっきのローカル変数から特殊文字列を抜き取る			
 		$e_FoodName = $db_link -> real_escape_string($FoodName);
@@ -19,11 +20,12 @@
 		$e_FoodDescription = $db_link -> real_escape_string($FoodDescription);
 		$e_FoodPrice = $db_link -> real_escape_string($FoodPrice);
 		$e_FoodStock = $db_link -> real_escape_string($FoodStock);
+		$e_cook = $db_link -> real_escape_string($cook);
 
 		// HTMLの特殊文字列をエスケープする
 		$h_FoodName = htmlspecialchars($e_FoodName, ENT_QUOTES, 'UTF-8', false);
 		$h_OrgID = htmlspecialchars($e_OrgID, ENT_QUOTES, 'UTF-8', false);
-		
+		$h_cook = htmlspecialchars($e_cook, ENT_QUOTES, 'UTF-8'. false);
 
 		// 最新の食品数を取得して食品数+1したデータをFoodIDにする。
 		$sql = mysqli_query($db_link, "SELECT COUNT(FoodID) AS num FROM tp_food");
@@ -31,12 +33,13 @@
 		$FoodID = $result['num'] + 1;
 
 		// 食品登録
-		$sql = mysqli_query($db_link, "INSERT INTO tp_food(FoodID,FoodName,OrgID,FoodDescription,FoodPrice,FoodStockFrom,FoodStock,Bought,Used,cooked,Got) VALUES ('$FoodID', '$FoodName', '$OrgID', '$FoodDescription', '$FoodPrice', '$FoodStock', '$FoodStock', '0', '0', '0', '0')");
+		$sql = mysqli_query($db_link, "INSERT INTO tp_food(FoodID,FoodName,OrgID,FoodDescription,FoodPrice,FoodStockFrom,FoodStock,cook) VALUES ('$FoodID', '$e_FoodName', '$h_OrgID', '$e_FoodDescription', '$e_FoodPrice', '$e_FoodStock', '$e_FoodStock','$h_cook')");
 		$message = "食品".$FoodID."を追加しました。";
 		$hostuserid = $_SESSION['UserID'];
 		$sql = mysqli_query($db_link, "INSERT INTO tp_log VALUES (CURRENT_TIMESTAMP, '$message', '$hostuserid', '', '')");
-		print("<script>alert('登録が完了しました。詳しくは団体食品一覧を御覧ください。');location.href = 'f-add.php';</script>");
+		print("<script>alert('登録が完了しました。詳しくは団体食品一覧を御覧ください。');/*location.href = 'f-add.php';*/</script>");
 	}
+	print($FoodID);
 ?>
 
 

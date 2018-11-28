@@ -139,6 +139,17 @@
               <input id="FoodStock" class="validate" type="number" name="FoodStock" min="1" required>
               <label for="FoodStock">販売可能数</label>
             </div>
+            <div class="input-field col s12">
+              <select name="cook" required>
+                <option value="" disabled selected>何か選択してください</option>
+                <option value="0">調理をしない</option>
+                <option value="1">当日調理をする</option>
+              </select>
+              <label for="cook">当日調理</label>
+              <script>
+                $('select').formSelect();
+              </script>
+            </div>
             <input type="submit" class="btn" value="送信">
           </form>
         </div>
