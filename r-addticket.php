@@ -2,8 +2,7 @@
   session_start();
   if(isset($_SESSION['UserID']) == '') {
     print("<script>location.href = 'index.php';</script>");
-  } else {
-
+    exit();//Session not set
   }
   $UserID = $_POST['UserID'];
   if ($UserID == '') {
@@ -16,6 +15,7 @@
   $goukei = $_POST['goukei'];
   if($azukari - $goukei  < 0){
     print("<script>alert('不正なリクエスト'); location.href='r-checkuserscart.php?CustID=".$UserID."';</script>");
+    exit();//処理の終了
   } else {
     require_once('config/config.php');
 
