@@ -2,6 +2,7 @@
   session_start();
   if(isset($_SESSION['UserID']) == '') {
     print("<script>location.href = 'index.php';</script>");
+    exit();//Session not set
   } else {
     require_once('config/config.php');
     $acode = $_GET['Acode'];

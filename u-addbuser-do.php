@@ -2,9 +2,9 @@
   session_start();
   if(isset($_SESSION['UserID']) == '') {
     print("<script>location.href = 'index.php';</script>");
-  } else {
-
+    exit();//Session not set
   }
+
     // u-addbuserから投げられてきた内容を変数にぶち込む
     $userid = $_POST['UserID'];
     $username = $_POST['UserName'];

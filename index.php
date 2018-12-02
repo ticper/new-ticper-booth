@@ -4,6 +4,7 @@
 
   } else {
     print("<script>location.href = 'home.php';</script>");
+    exit();
   }
 ?>
 <!DOCTYPE HTML>

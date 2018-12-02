@@ -5,8 +5,7 @@
   // セッション変数「UserID」にログイン中のユーザ名がないとき、ログイン画面に戻す。
   if(isset($_SESSION['UserID']) == '') {
     print("<script>location.href = 'index.php';</script>");
-  } else {
-
+    exit();//Session not set
   }
   $orgid = $_POST['orgid'];
   $change = $_POST['statuschangeto'];

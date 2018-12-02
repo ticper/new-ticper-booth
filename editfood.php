@@ -2,6 +2,7 @@
 	session_start();
  	if(isset($_SESSION['UserID']) == '') {
 	print("<script>location.href = 'index.php';</script>");
+	exit();//Session not set
 	}
 ?>
 <!DOCTYPE HTML>

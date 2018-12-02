@@ -2,6 +2,7 @@
   session_start();
   if(isset($_SESSION['UserID']) == '') {
     print("<script>location.href = 'index.php';</script>");
+    exit();//Session not set
   } else {
     require_once('config/config.php');
     $userid = $_SESSION['UserID'];
@@ -10,6 +11,7 @@
     $root = $result['SuperUser'];
     if($root != 1){
       print("<script>alert('このページは管理者以外閲覧できません');location.href = 'home.php';</script>");
+      exit();
     }
   }
 ?>

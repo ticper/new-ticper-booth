@@ -2,14 +2,12 @@
   session_start();
   if(isset($_SESSION['UserID']) == '') {
     print("<script>location.href = 'index.php';</script>");
-  } else {
-
-  }
+    exit();//Session not set
+  } 
   $UserID2 = $_GET['CustID'];
   if ($UserID2 == '') {
     print("<script>alert('顧客IDが空になっているため、カートデータを読み取れません。'); location.href='r-qrcheck.php';</script>");
-  } else {
-
+    exit();//処理の中断
   }
 ?>
 <!DOCTYPE HTML>
