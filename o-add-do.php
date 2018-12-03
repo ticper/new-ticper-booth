@@ -1,6 +1,11 @@
 <?php
 	// セッションの引き継ぎ
 	session_start();
+
+    if(isset($_SESSION['UserID']) == '') {
+        print("<script>location.href = 'index.php';</script>");
+        exit();//Session not set
+    }
 	
 	// 団体情報入力ぺページで入力した内容をローカル変数に投げる
 	$orgname = $_POST['OrgName'];

@@ -3,6 +3,8 @@
     if(isset($_SESSION['UserID']) == ''){
         print('<script>alert("不正なリクエスト")</script>');
         print('<script>location.href = "index.php";</script>');
+        exit();
+        
     } else {
 
         $hostuserid = $_SESSION['UserID'];
