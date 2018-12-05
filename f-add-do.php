@@ -38,7 +38,7 @@
 		$message = "食品".$FoodID."を追加しました。";
 		$hostuserid = $_SESSION['UserID'];
 		$sql = mysqli_query($db_link, "INSERT INTO tp_log VALUES (CURRENT_TIMESTAMP, '$message', '$hostuserid', '', '')");
-		print("<script>alert('登録が完了しました。詳しくは団体食品一覧を御覧ください。');/*location.href = 'f-add.php';*/</script>");
+		print("<script>alert('登録が完了しました。詳しくは団体食品一覧を御覧ください。');location.href = 'f-add.php';</script>");
 	}
 	print($FoodID);
 ?>
