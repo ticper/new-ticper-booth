@@ -1,4 +1,6 @@
 <?php
+  // エラーを出力しない
+  error_reporting(0);
   $db_host = 'db.ticper.com';
   $db_user = 'ticper';
   $db_pass = 'ticp-37648';
