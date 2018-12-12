@@ -21,11 +21,16 @@
 
     $sql = mysqli_query($db_link, "SELECT FoodID, Sheets FROM tp_cust_carts WHERE UserID = '$UserID'");
     while($result = mysqli_fetch_assoc($sql)) {
-     $Acode = rand(100000, 999999);
-     $FoodID = $result['FoodID'];
-     $Sheets = $result['Sheets'];
-     $sql2 = mysqli_query($db_link, "INSERT INTO tp_ticket(TicketACode, UserID,FoodID, Sheets) VALUES ('$Acode', '$UserID','$FoodID', '$Sheets')");
-     $sql3 = mysqli_query($db_link, "UPDATE tp_food SET FoodStock = FoodStock - '$Sheets', Bought = Bought + '$Sheets' WHERE FoodID = '$FoodID'");
+      
+      do {
+        $Acode = rand(100000, 999999);
+        $sql2 = mysqli_query($db_link, "SELECT TicketACode FROM tp_ticket WHERE TicketACode = $resultcode");
+        $FoodID = $result['FoodID'];
+        $Sheets = $result['Sheets'];
+        $sql2 = mysqli_query($db_link, "INSERT INTO tp_ticket(TicketACode, UserID,FoodID, Sheets) VALUES ('$Acode', '$UserID','$FoodID', '$Sheets')");
+      }
+      while($sql2);
+      $sql3 = mysqli_query($db_link, "UPDATE tp_food SET FoodStock = FoodStock - '$Sheets', Bought = Bought + '$Sheets' WHERE FoodID = '$FoodID'");
     }
     $sql4 = mysqli_query($db_link, "DELETE FROM tp_cust_carts WHERE UserID = '$UserID'");
   }
