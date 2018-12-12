@@ -30,12 +30,13 @@
     
                     $sql = mysqli_query($db_link, "SELECT FoodID, Sheets FROM tp_kobetsu_carts WHERE CartID = '$cid'");
                     while($result = mysqli_fetch_assoc($sql)) {
-                        $acode = rand(111111,999999);
-                        $fid = $result['FoodID'];
-                        $sh = $result['Sheets'];
-                        $sql2 = mysqli_query($db_link, "INSERT INTO tp_ticket(TicketACode, UserID, CartID, FoodID, Sheets, Used, Changed, ChangeNo) VALUES ('$acode', '', '$cid', '$fid', '$sh', '0', '0', '0')");
+                        do {
+                            $acode = rand(111111,999999);
+                            $fid = $result['FoodID'];
+                            $sh = $result['Sheets'];
+                            $sql2 = mysqli_query($db_link, "INSERT INTO tp_ticket(TicketACode, UserID, CartID, FoodID, Sheets, Used, Changed, ChangeNo) VALUES ('$acode', '', '$cid', '$fid', '$sh', '0', '0', '0')");
+                        }while(!$sql2);
                         $sql3 = mysqli_query($db_link, "UPDATE tp_food SET FoodStock = FoodStock - '$sh', Bought = Bought + '$sh' WHERE FoodID = '$fid'");
-
                     }
                     $sql = mysqli_query($db_link, "SELECT TicketACode, FoodID, Sheets FROM tp_ticket WHERE CartID = '$cid'");
                     $goukei = 0;
