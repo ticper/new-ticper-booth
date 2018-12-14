@@ -36,7 +36,13 @@
                             $sh = $result['Sheets'];
                             $sql2 = mysqli_query($db_link, "INSERT INTO tp_ticket(TicketACode, UserID, CartID, FoodID, Sheets, Used, Changed, ChangeNo) VALUES ('$acode', '', '$cid', '$fid', '$sh', '0', '0', '0')");
                         }while(!$sql2);
-                        $sql3 = mysqli_query($db_link, "UPDATE tp_food SET FoodStock = FoodStock - '$sh', Bought = Bought + '$sh' WHERE FoodID = '$fid'");
+                        $db_link -> begin_transaction();
+                        try {
+                            $sql3 = mysqli_query($db_link, "UPDATE tp_food SET FoodStock = FoodStock - '$sh', Bought = Bought + '$sh' WHERE FoodID = '$fid'");
+                        } catch (Exception $e) {
+                            $db_link -> rollback();
+                        }
+                        $db_link -> commit();
                     }
                     $sql = mysqli_query($db_link, "SELECT TicketACode, FoodID, Sheets FROM tp_ticket WHERE CartID = '$cid'");
                     $goukei = 0;
