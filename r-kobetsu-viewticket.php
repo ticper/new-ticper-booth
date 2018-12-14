@@ -58,7 +58,7 @@
                         $sql3 = mysqli_query($db_link, "SELECT OrgName, OrgPlace FROM tp_org WHERE OrgID = '$oid'");
                         $result3 = mysqli_fetch_assoc($sql3);
                         print($result3['OrgName'].' - '.$result2['FoodName'].'('.$result['Sheets'].'枚)<br>');
-                        print($result3['OrgPlace'].'で交換してください。');
+                        print($result3['OrgPlace'].'で交換してください。<br>AC:<b>'.$acode.'</b>');
                         print('<input type="checkbox"><span>交換済み</span>');
                         print('</div>');
                         $goukei = $goukei + $result2['FoodPrice'];
