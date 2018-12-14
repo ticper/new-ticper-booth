@@ -1,9 +1,9 @@
 <?php
   // エラーを出力しない
   error_reporting(0);
-  $db_host = 'db.rintech.tokyo';
-  $db_user = 'root';
-  $db_pass = 'yakiniki2001';
+  $db_host = 'db.ticper.com';
+  $db_user = 'ticper';
+  $db_pass = 'ticp-37648';
   $db_name = 'ticper';
 
   $db_link = new mysqli($db_host, $db_user, $db_pass, $db_name);
